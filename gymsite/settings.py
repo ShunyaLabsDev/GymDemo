@@ -22,11 +22,8 @@ ALLOWED_HOSTS = os.environ.get(
 ).split(",")
 
 CSRF_TRUSTED_ORIGINS = [
-    f"https://{host.strip()}"
-    for host in ALLOWED_HOSTS
-    if host.strip()
+    "https://web-production-b9d6a.up.railway.app",
 ]
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
