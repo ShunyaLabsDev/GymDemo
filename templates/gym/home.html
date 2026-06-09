@@ -1,0 +1,395 @@
+{% extends 'gym/base.html' %}
+{% load static %}
+
+{% block title %}{{ config.gym_name }} — {{ config.tagline }}{% endblock %}
+
+{% block content %}
+
+<!-- ═══ HERO ════════════════════════════════════════════════════════════ -->
+<section class="apex-hero">
+  <div class="container hero-content">
+    <div class="hero-label">
+      <div class="hero-label-line"></div>
+      <span>Est. {{ config.established }} · {{ config.address_city }}</span>
+    </div>
+    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+      FORGE<br>YOUR<br><span class="orange">LEGACY</span>
+    </h1>
+    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="250">
+      {{ config.tagline }}. Premium training, elite coaching, and a community built for those who refuse to be ordinary.
+    </p>
+    <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
+      <a href="{% url 'membership' %}" class="apex-btn-primary">
+        <i class="bi bi-lightning-fill me-2"></i>Start Today
+      </a>
+      <a href="#simulator" class="apex-btn-outline">
+        My Fitness Journey →
+      </a>
+    </div>
+  </div>
+  <a href="#stats" class="hero-scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </a>
+</section>
+
+<!-- ═══ STATS BAR ══════════════════════════════════════════════════════ -->
+<section class="apex-stats" id="stats">
+  <div class="container">
+    <div class="row g-0">
+      {% for stat in config.stats %}
+      <div class="col-6 col-lg-3">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+          <div class="stat-value" data-counter="{{ stat.value }}">{{ stat.value }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT INTRO ════════════════════════════════════════════════════ -->
+<section class="apex-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5" data-aos="fade-right">
+        <div class="label-apex section-label">Who We Are</div>
+        <h2 class="section-title">NOT JUST A GYM.<br><span class="text-orange">A MOVEMENT.</span></h2>
+        <div class="divider-orange"></div>
+        <p class="section-subtitle mb-4">{{ config.description }}</p>
+        <a href="{% url 'about' %}" class="apex-btn-outline">Our Story →</a>
+      </div>
+      <div class="col-lg-7" data-aos="fade-left">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="value-card text-center p-4">
+              <div class="value-icon mx-auto mb-3"><i class="bi bi-trophy-fill"></i></div>
+              <h5 class="heading-apex" style="font-size:1rem;">World-Class Equipment</h5>
+              <p style="font-size:0.85rem;color:var(--white-40);margin:0;">Latest machines from Life Fitness, Hammer Strength & more</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="value-card text-center p-4">
+              <div class="value-icon mx-auto mb-3"><i class="bi bi-people-fill"></i></div>
+              <h5 class="heading-apex" style="font-size:1rem;">Elite Coaching</h5>
+              <p style="font-size:0.85rem;color:var(--white-40);margin:0;">Certified trainers with international competition experience</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="value-card text-center p-4">
+              <div class="value-icon mx-auto mb-3"><i class="bi bi-clock-fill"></i></div>
+              <h5 class="heading-apex" style="font-size:1rem;">Open 7 Days</h5>
+              <p style="font-size:0.85rem;color:var(--white-40);margin:0;">Early morning to late night — train on your schedule</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="value-card text-center p-4">
+              <div class="value-icon mx-auto mb-3"><i class="bi bi-heart-pulse-fill"></i></div>
+              <h5 class="heading-apex" style="font-size:1rem;">Holistic Wellness</h5>
+              <p style="font-size:0.85rem;color:var(--white-40);margin:0;">Nutrition, recovery, mental performance — complete ecosystem</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FITNESS SIMULATOR ══════════════════════════════════════════════ -->
+<section class="apex-section simulator-section" id="simulator">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="label-apex section-label">Exclusive Feature</div>
+      <h2 class="section-title">YOUR FITNESS<br><span class="text-orange">JOURNEY SIMULATOR</span></h2>
+      <div class="divider-orange mx-auto"></div>
+      <p class="section-subtitle mx-auto mt-3">Answer 3 questions and instantly get your personalized transformation roadmap with milestones, workout type, and the perfect membership plan.</p>
+    </div>
+
+    <div class="simulator-wrapper" data-aos="fade-up" data-aos-delay="100" id="fitnessSimulator">
+      <!-- Progress Dots -->
+      <div class="sim-progress">
+        <div class="sim-dot active"></div>
+        <div class="sim-dot"></div>
+        <div class="sim-dot"></div>
+        <div class="sim-dot"></div>
+      </div>
+
+      <!-- Step 1: Fitness Level -->
+      <div class="sim-step active" data-step="1">
+        <div class="label-apex mb-2">Step 1 of 3</div>
+        <h4 class="heading-apex mb-4" style="font-size:1.6rem;">What's your current fitness level?</h4>
+        <div class="sim-option-grid">
+          <div class="sim-option" data-key="beginner">
+            <span class="sim-icon">🌱</span>
+            <div class="sim-label">Beginner</div>
+            <div class="sim-desc">Just starting out or returning after a break</div>
+            <span class="sim-check">✓</span>
+          </div>
+          <div class="sim-option" data-key="intermediate">
+            <span class="sim-icon">🔥</span>
+            <div class="sim-label">Intermediate</div>
+            <div class="sim-desc">Training regularly for 6+ months</div>
+            <span class="sim-check">✓</span>
+          </div>
+          <div class="sim-option" data-key="advanced">
+            <span class="sim-icon">⚡</span>
+            <div class="sim-label">Advanced</div>
+            <div class="sim-desc">Competitive or 3+ years of serious training</div>
+            <span class="sim-check">✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Goal -->
+      <div class="sim-step" data-step="2">
+        <div class="label-apex mb-2">Step 2 of 3</div>
+        <h4 class="heading-apex mb-4" style="font-size:1.6rem;">What is your primary goal?</h4>
+        <div class="sim-option-grid">
+          <div class="sim-option" data-key="weight-loss">
+            <span class="sim-icon">📉</span>
+            <div class="sim-label">Weight Loss</div>
+            <div class="sim-desc">Burn fat, get lean & defined</div>
+            <span class="sim-check">✓</span>
+          </div>
+          <div class="sim-option" data-key="muscle-gain">
+            <span class="sim-icon">💪</span>
+            <div class="sim-label">Muscle Gain</div>
+            <div class="sim-desc">Build size, mass & strength</div>
+            <span class="sim-check">✓</span>
+          </div>
+          <div class="sim-option" data-key="strength">
+            <span class="sim-icon">🏋️</span>
+            <div class="sim-label">Strength</div>
+            <div class="sim-desc">Maximize raw power output</div>
+            <span class="sim-check">✓</span>
+          </div>
+          <div class="sim-option" data-key="athletic">
+            <span class="sim-icon">🏃</span>
+            <div class="sim-label">Athletic Performance</div>
+            <div class="sim-desc">Speed, agility & sport performance</div>
+            <span class="sim-check">✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Timeline -->
+      <div class="sim-step" data-step="3">
+        <div class="label-apex mb-2">Step 3 of 3</div>
+        <h4 class="heading-apex mb-4" style="font-size:1.6rem;">What's your target timeline?</h4>
+        <div class="sim-option-grid">
+          <div class="sim-option" data-key="3-months">
+            <span class="sim-icon">⏱️</span>
+            <div class="sim-label">3 Months</div>
+            <div class="sim-desc">Intense transformation sprint</div>
+            <span class="sim-check">✓</span>
+          </div>
+          <div class="sim-option" data-key="6-months">
+            <span class="sim-icon">📅</span>
+            <div class="sim-label">6 Months</div>
+            <div class="sim-desc">Balanced, sustainable progress</div>
+            <span class="sim-check">✓</span>
+          </div>
+          <div class="sim-option" data-key="12-months">
+            <span class="sim-icon">🏆</span>
+            <div class="sim-label">12 Months</div>
+            <div class="sim-desc">Complete lifestyle transformation</div>
+            <span class="sim-check">✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Results -->
+      <div class="sim-step" data-step="4">
+        <div class="label-apex mb-2">Your Personalized Plan</div>
+        <h4 class="heading-apex mb-4" style="font-size:1.6rem;">Here's your transformation roadmap 🔥</h4>
+        <div id="simResult">
+          <div class="text-center py-5">
+            <div class="spinner-border text-orange" role="status"></div>
+            <div class="mt-3" style="color:var(--white-40);">Generating your roadmap…</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /simulator-wrapper -->
+  </div>
+</section>
+
+<!-- ═══ FEATURED TRAINERS ══════════════════════════════════════════════ -->
+{% if trainers %}
+<section class="apex-section" style="background:var(--apex-charcoal);">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-5">
+      <div>
+        <div class="label-apex section-label">The Team</div>
+        <h2 class="section-title">MEET YOUR<br><span class="text-orange">COACHES</span></h2>
+        <div class="divider-orange"></div>
+      </div>
+      <a href="{% url 'trainers' %}" class="apex-btn-outline">All Trainers →</a>
+    </div>
+    <div class="row g-4">
+      {% for trainer in trainers %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="trainer-card">
+          <div class="trainer-photo-wrap">
+            {% if trainer.photo %}
+              <img src="{{ trainer.photo.url }}" alt="{{ trainer.name }}" class="trainer-photo">
+            {% else %}
+              <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--apex-dark2),var(--apex-mid));display:flex;align-items:center;justify-content:center;font-size:4rem;">👤</div>
+            {% endif %}
+            <div class="trainer-overlay"></div>
+            <div class="trainer-socials">
+              {% if trainer.instagram %}<a href="{{ trainer.instagram }}" class="trainer-social-btn" target="_blank"><i class="bi bi-instagram"></i></a>{% endif %}
+              {% if trainer.facebook  %}<a href="{{ trainer.facebook  }}" class="trainer-social-btn" target="_blank"><i class="bi bi-facebook"></i></a>{% endif %}
+            </div>
+            <div class="trainer-exp-badge">{{ trainer.experience }}Y Exp</div>
+          </div>
+          <div class="trainer-info">
+            <div class="trainer-name">{{ trainer.name }}</div>
+            <div class="trainer-title">{{ trainer.title }}</div>
+            <div class="trainer-tags">
+              {% for spec in trainer.get_specialties_list %}
+                {% if forloop.counter <= 3 %}
+                <span class="trainer-tag">{{ spec }}</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ═══ TRANSFORMATIONS ════════════════════════════════════════════════ -->
+{% if transformations %}
+<section class="apex-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="label-apex section-label">Real Results</div>
+      <h2 class="section-title">TRANSFORMATION<br><span class="text-orange">STORIES</span></h2>
+      <div class="divider-orange mx-auto"></div>
+    </div>
+    <div class="row g-4">
+      {% for t in transformations %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}50">
+        <div class="transform-card">
+          <div class="transform-photos">
+            <div class="transform-photo-wrap">
+              {% if t.before_photo %}<img src="{{ t.before_photo.url }}" alt="Before">{% else %}<div style="width:100%;height:100%;background:var(--apex-dark2);display:flex;align-items:center;justify-content:center;color:var(--white-40);font-size:0.8rem;">BEFORE</div>{% endif %}
+              <span class="photo-label">Before</span>
+            </div>
+            <div class="transform-photo-wrap">
+              {% if t.after_photo %}<img src="{{ t.after_photo.url }}" alt="After">{% else %}<div style="width:100%;height:100%;background:var(--apex-mid);display:flex;align-items:center;justify-content:center;color:var(--white-40);font-size:0.8rem;">AFTER</div>{% endif %}
+              <span class="photo-label" style="background:var(--apex-orange);">After</span>
+            </div>
+          </div>
+          <div class="transform-info">
+            <div class="transform-meta">
+              <span class="transform-badge">{{ t.duration }}</span>
+              {% if t.weight_lost %}<span class="transform-badge">{{ t.weight_lost }}</span>{% endif %}
+              {% if t.muscle_gained %}<span class="transform-badge">{{ t.muscle_gained }}</span>{% endif %}
+            </div>
+            <h6 class="heading-apex" style="font-size:1rem;">{{ t.member_name }}</h6>
+            <p style="font-size:0.85rem;color:var(--white-40);margin:4px 0 0;">"{{ t.testimonial|truncatechars:100 }}"</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ═══ MEMBERSHIP PREVIEW ═════════════════════════════════════════════ -->
+<section class="apex-section" style="background:var(--apex-charcoal);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="label-apex section-label">Pricing</div>
+      <h2 class="section-title">MEMBERSHIP<br><span class="text-orange">PLANS</span></h2>
+      <div class="divider-orange mx-auto"></div>
+      <p class="section-subtitle mx-auto mt-3">No hidden fees. No contracts you can't escape. Just pure results.</p>
+    </div>
+    <div class="row g-4">
+      {% for plan in config.plans %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="plan-card {% if plan.badge == 'POPULAR' %}popular{% endif %}" style="--plan-color:{{ plan.color }};">
+          {% if plan.badge %}<span class="plan-badge">{{ plan.badge }}</span>{% endif %}
+          <div class="plan-name">{{ plan.name }}</div>
+          <div class="plan-duration">{{ plan.duration }}</div>
+          <div class="plan-price">
+            <span class="plan-currency">₹</span>
+            <span class="plan-amount">{{ plan.price|floatformat:0 }}</span>
+            {% if plan.original %}<span class="plan-original">₹{{ plan.original|floatformat:0 }}</span>{% endif %}
+          </div>
+          <div class="plan-monthly" style="color:var(--white-40);font-size:0.8rem;">
+            {% if plan.months > 1 %}₹{{ plan.price|floatformat:0 }} for {{ plan.months }} months{% else %}per month{% endif %}
+          </div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            {% for feat in plan.features %}
+            <li><i class="bi bi-check2-circle feat-icon"></i>{{ feat }}</li>
+            {% endfor %}
+            {% for feat in plan.excluded %}
+            <li class="excluded"><i class="bi bi-x-circle feat-icon"></i>{{ feat }}</li>
+            {% endfor %}
+          </ul>
+          <a href="{% url 'contact' %}" class="apex-btn-primary plan-cta">Get Started</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+      <a href="{% url 'membership' %}" class="apex-btn-outline">Compare All Plans →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ════════════════════════════════════════════════════ -->
+{% if testimonials %}
+<section class="apex-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="label-apex section-label">Member Stories</div>
+      <h2 class="section-title">WHAT OUR<br><span class="text-orange">MEMBERS SAY</span></h2>
+      <div class="divider-orange mx-auto"></div>
+    </div>
+    <div class="row g-4">
+      {% for t in testimonials %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            {% for i in "12345" %}{% if forloop.counter <= t.rating %}★{% else %}☆{% endif %}{% endfor %}
+          </div>
+          <p class="testimonial-text">{{ t.text }}</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">{{ t.member_name|first }}</div>
+            <div>
+              <div class="testimonial-name">{{ t.member_name }}</div>
+              <div class="testimonial-role">{{ t.member_title }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ═══ CTA BANNER ══════════════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container text-center" data-aos="zoom-in">
+    <div class="label-apex mb-3" style="color:rgba(255,255,255,0.7);">Ready to Transform?</div>
+    <h2 class="section-title" style="color:#fff;">YOUR BEST SELF<br>STARTS TODAY</h2>
+    <p class="section-subtitle mx-auto mt-3 mb-4" style="color:rgba(255,255,255,0.8);">Join {{ config.gym_name }} and become part of a community that pushes boundaries. First month free on Quarterly and above plans.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="{% url 'membership' %}" class="apex-btn-primary" style="background:#fff;color:var(--apex-orange);">View Membership Plans</a>
+      <a href="https://wa.me/{{ config.whatsapp }}?text=Hi%20APEX!%20I%20want%20to%20join%20the%20gym." class="apex-btn-outline" style="border-color:rgba(255,255,255,0.6);color:#fff;" target="_blank"><i class="bi bi-whatsapp me-2"></i>Chat With Us</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

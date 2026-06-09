@@ -1,0 +1,130 @@
+{% extends 'gym/base.html' %}
+{% block title %}Contact Us — {{ config.gym_name }}{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb-apex"><a href="/">Home</a><span>/</span><span class="current">Contact</span></div>
+    <div class="label-apex section-label">Get In Touch</div>
+    <h1 class="section-title" data-aos="fade-up">LET'S<br><span class="text-orange">CONNECT</span></h1>
+    <div class="divider-orange mt-3"></div>
+    <p class="section-subtitle mt-3">Have questions? Ready to join? We respond within 24 hours — usually within minutes.</p>
+  </div>
+</section>
+
+<section class="apex-section" style="background:var(--apex-charcoal);">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- Contact Form -->
+      <div class="col-lg-7" data-aos="fade-right">
+        <div class="glass-card p-4 p-md-5">
+          <h3 class="heading-apex mb-2" style="font-size:1.8rem;">Send Us a Message</h3>
+          <p style="color:var(--white-40);font-size:0.9rem;margin-bottom:32px;">Fill the form and our team will get back to you within 24 hours.</p>
+
+          <form method="POST" action="{% url 'contact' %}" novalidate>
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="apex-form-label">Full Name *</label>
+                <input type="text" name="name" class="apex-input {% if form.name.errors %}is-invalid{% endif %}" placeholder="Your Full Name" value="{{ form.name.value|default:'' }}" required>
+                {% if form.name.errors %}<div style="color:#ff6b6b;font-size:0.8rem;margin-top:4px;">{{ form.name.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-md-6">
+                <label class="apex-form-label">Email Address *</label>
+                <input type="email" name="email" class="apex-input {% if form.email.errors %}is-invalid{% endif %}" placeholder="your@email.com" value="{{ form.email.value|default:'' }}" required>
+                {% if form.email.errors %}<div style="color:#ff6b6b;font-size:0.8rem;margin-top:4px;">{{ form.email.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-12">
+                <label class="apex-form-label">Phone Number</label>
+                <input type="tel" name="phone" class="apex-input" placeholder="+91 XXXXX XXXXX" value="{{ form.phone.value|default:'' }}">
+              </div>
+              <div class="col-12">
+                <label class="apex-form-label">Message *</label>
+                <textarea name="message" class="apex-input" rows="5" placeholder="Tell us about your fitness goals, questions about membership, or anything else…" required>{{ form.message.value|default:'' }}</textarea>
+                {% if form.message.errors %}<div style="color:#ff6b6b;font-size:0.8rem;margin-top:4px;">{{ form.message.errors.0 }}</div>{% endif %}
+              </div>
+              <div class="col-12">
+                <button type="submit" class="apex-btn-primary w-100" style="padding:16px;">
+                  <i class="bi bi-send-fill me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-lg-5" data-aos="fade-left">
+        <div class="mb-4">
+          <h3 class="heading-apex mb-4" style="font-size:1.8rem;">Contact Details</h3>
+
+          <div class="info-card mb-3">
+            <div class="info-card-icon"><i class="bi bi-geo-alt-fill"></i></div>
+            <h6>Our Location</h6>
+            <p style="color:var(--white-70);margin:0;font-size:0.9rem;line-height:1.7;">{{ config.address_full }}</p>
+          </div>
+
+          <div class="info-card mb-3">
+            <div class="info-card-icon"><i class="bi bi-telephone-fill"></i></div>
+            <h6>Phone</h6>
+            <p style="margin:0;"><a href="tel:{{ config.phone }}" style="color:var(--white-70);text-decoration:none;font-size:0.9rem;">{{ config.phone }}</a></p>
+            <p style="margin:4px 0 0;"><a href="tel:{{ config.phone2 }}" style="color:var(--white-40);text-decoration:none;font-size:0.85rem;">{{ config.phone2 }}</a></p>
+          </div>
+
+          <div class="info-card mb-3">
+            <div class="info-card-icon"><i class="bi bi-envelope-fill"></i></div>
+            <h6>Email</h6>
+            <p style="margin:0;"><a href="mailto:{{ config.email }}" style="color:var(--white-70);text-decoration:none;font-size:0.9rem;">{{ config.email }}</a></p>
+          </div>
+
+          <div class="info-card mb-4">
+            <div class="info-card-icon"><i class="bi bi-clock-fill"></i></div>
+            <h6>Working Hours</h6>
+            {% for day, hours in config.working_hours.items %}
+            <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--apex-border);">
+              <span style="font-size:0.85rem;color:var(--white-40);">{{ day }}</span>
+              <span style="font-size:0.85rem;color:var(--white-70);">{{ hours }}</span>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- WhatsApp CTA -->
+          <a href="https://wa.me/{{ config.whatsapp }}?text=Hi%20APEX%20Fitness!%20I'd%20like%20to%20know%20more%20about%20membership." class="whatsapp-btn d-flex w-100 justify-content-center" target="_blank" style="font-size:1rem;padding:14px 24px;">
+            <i class="bi bi-whatsapp me-2" style="font-size:1.2rem;"></i>Chat on WhatsApp
+          </a>
+
+          <!-- Social Links -->
+          <div class="mt-4">
+            <div class="label-apex mb-3">Follow Us</div>
+            <div class="social-links">
+              <a href="{{ config.instagram }}" class="social-btn" target="_blank"><i class="bi bi-instagram"></i></a>
+              <a href="{{ config.facebook  }}" class="social-btn" target="_blank"><i class="bi bi-facebook"></i></a>
+              <a href="{{ config.youtube   }}" class="social-btn" target="_blank"><i class="bi bi-youtube"></i></a>
+              <a href="{{ config.twitter   }}" class="social-btn" target="_blank"><i class="bi bi-twitter-x"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Google Map -->
+<section style="background:var(--apex-black);">
+  <div class="container-fluid p-0">
+    <div style="position:relative;">
+      <div style="background:var(--apex-charcoal);height:420px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;border-top:1px solid var(--apex-border);">
+        <div style="font-size:3rem;">📍</div>
+        <div class="heading-apex" style="font-size:1.5rem;">{{ config.gym_name }}</div>
+        <div style="color:var(--white-40);font-size:0.9rem;">{{ config.address_full }}</div>
+        <a href="https://maps.google.com/?q={{ config.address_full|urlencode }}" target="_blank" class="apex-btn-primary mt-2">
+          <i class="bi bi-map-fill me-2"></i>Open in Google Maps
+        </a>
+        <p style="color:var(--white-40);font-size:0.8rem;margin-top:8px;">Replace with your Google Maps embed in site_config.py</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

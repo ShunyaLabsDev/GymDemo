@@ -1,0 +1,142 @@
+{% extends 'gym/base.html' %}
+{% block title %}Our Trainers — {{ config.gym_name }}{% endblock %}
+{% block content %}
+
+<!-- Hero -->
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb-apex"><a href="/">Home</a><span>/</span><span class="current">Trainers</span></div>
+    <div class="label-apex section-label">The Coaches</div>
+    <h1 class="section-title" data-aos="fade-up">ELITE<br><span class="text-orange">TRAINERS</span></h1>
+    <div class="divider-orange mt-3"></div>
+    <p class="section-subtitle mt-3">World-class coaches. Certified. Experienced. Obsessed with your results.</p>
+  </div>
+</section>
+
+<!-- Trainers Grid -->
+<section class="apex-section" style="background:var(--apex-charcoal);">
+  <div class="container">
+    {% if trainers %}
+    <div class="row g-4">
+      {% for trainer in trainers %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}00">
+        <div class="trainer-card h-100" style="display:flex;flex-direction:column;">
+          <div class="trainer-photo-wrap">
+            {% if trainer.photo %}
+              <img src="{{ trainer.photo.url }}" alt="{{ trainer.name }}" class="trainer-photo">
+            {% else %}
+              <div style="width:100%;height:100%;min-height:280px;background:linear-gradient(135deg,var(--apex-dark2),var(--apex-mid));display:flex;align-items:center;justify-content:center;font-size:5rem;">👤</div>
+            {% endif %}
+            <div class="trainer-overlay"></div>
+            <div class="trainer-socials">
+              {% if trainer.instagram %}<a href="{{ trainer.instagram }}" class="trainer-social-btn" target="_blank"><i class="bi bi-instagram"></i></a>{% endif %}
+              {% if trainer.facebook  %}<a href="{{ trainer.facebook  }}" class="trainer-social-btn" target="_blank"><i class="bi bi-facebook"></i></a>{% endif %}
+            </div>
+            <div class="trainer-exp-badge">{{ trainer.experience }} Yrs</div>
+          </div>
+          <div class="trainer-info" style="flex:1;display:flex;flex-direction:column;">
+            <div class="trainer-name">{{ trainer.name }}</div>
+            <div class="trainer-title">{{ trainer.title }}</div>
+            <p style="font-size:0.85rem;color:var(--white-40);line-height:1.6;margin:10px 0 12px;">{{ trainer.bio|truncatechars:120 }}</p>
+            <div class="trainer-tags mb-3">
+              {% for spec in trainer.get_specialties_list %}
+              <span class="trainer-tag">{{ spec }}</span>
+              {% endfor %}
+            </div>
+            <!-- Certifications -->
+            {% if trainer.get_certifications_list %}
+            <div style="margin-top:auto;">
+              <div style="font-family:var(--font-heading);font-size:0.7rem;letter-spacing:0.12em;color:var(--apex-orange);text-transform:uppercase;margin-bottom:6px;">Certifications</div>
+              {% for cert in trainer.get_certifications_list %}
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                  <i class="bi bi-patch-check-fill" style="color:var(--apex-orange);font-size:0.75rem;"></i>
+                  <span style="font-size:0.78rem;color:var(--white-70);">{{ cert }}</span>
+                </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <!-- Placeholder cards when no trainers in DB -->
+    <div class="row g-4">
+      {% for i in "12345678"|make_list %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="trainer-card">
+          <div class="trainer-photo-wrap" style="min-height:280px;">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a1a,#2d2d2d);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+              <div style="font-size:4rem;">👤</div>
+              <div style="font-family:var(--font-heading);font-size:0.75rem;color:var(--white-40);letter-spacing:0.1em;">TRAINER PHOTO</div>
+            </div>
+            <div class="trainer-overlay"></div>
+            <div class="trainer-exp-badge">10+ Yrs</div>
+          </div>
+          <div class="trainer-info">
+            <div class="trainer-name">Trainer Name</div>
+            <div class="trainer-title">Head Coach · Strength & Conditioning</div>
+            <div class="trainer-tags mt-2">
+              <span class="trainer-tag">Strength</span>
+              <span class="trainer-tag">HIIT</span>
+              <span class="trainer-tag">Nutrition</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+      <p style="color:var(--white-40);font-size:0.9rem;">Add trainers via the <a href="/admin/" style="color:var(--apex-orange);">Django Admin Panel</a></p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Why Train With Us -->
+<section class="apex-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="label-apex section-label">Why Choose Us</div>
+      <h2 class="section-title">THE <span class="text-orange">APEX</span> COACHING DIFFERENCE</h2>
+      <div class="divider-orange mx-auto"></div>
+    </div>
+    <div class="row g-4">
+      {% for item in "1234"|make_list %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="glass-card p-4 text-center h-100">
+          {% if forloop.counter == 1 %}
+          <div class="value-icon mx-auto mb-3"><i class="bi bi-award-fill"></i></div>
+          <h5 class="heading-apex mb-2" style="font-size:1rem;">Internationally Certified</h5>
+          <p style="font-size:0.85rem;color:var(--white-40);margin:0;line-height:1.7;">Every coach holds at minimum 2 internationally recognized certifications (ACE, NASM, ISSA, CSCS)</p>
+          {% elif forloop.counter == 2 %}
+          <div class="value-icon mx-auto mb-3"><i class="bi bi-graph-up-arrow"></i></div>
+          <h5 class="heading-apex mb-2" style="font-size:1rem;">Progress Tracking</h5>
+          <p style="font-size:0.85rem;color:var(--white-40);margin:0;line-height:1.7;">Weekly check-ins, monthly progress photos & body composition analysis included with every plan</p>
+          {% elif forloop.counter == 3 %}
+          <div class="value-icon mx-auto mb-3"><i class="bi bi-person-check-fill"></i></div>
+          <h5 class="heading-apex mb-2" style="font-size:1rem;">1-on-1 Attention</h5>
+          <p style="font-size:0.85rem;color:var(--white-40);margin:0;line-height:1.7;">We cap client loads so your trainer is always focused on YOU, not split across 50 members</p>
+          {% elif forloop.counter == 4 %}
+          <div class="value-icon mx-auto mb-3"><i class="bi bi-chat-heart-fill"></i></div>
+          <h5 class="heading-apex mb-2" style="font-size:1rem;">24/7 Support</h5>
+          <p style="font-size:0.85rem;color:var(--white-40);margin:0;line-height:1.7;">WhatsApp access to your trainer between sessions. Questions, form checks, meal advice — always available</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container text-center" data-aos="zoom-in">
+    <h2 class="section-title" style="color:#fff;">READY TO TRAIN<br>WITH THE BEST?</h2>
+    <p class="section-subtitle mx-auto mt-3 mb-4" style="color:rgba(255,255,255,0.8);">Book a free trial session with one of our elite coaches today.</p>
+    <a href="{% url 'contact' %}" class="apex-btn-primary" style="background:#fff;color:var(--apex-orange);">Book Free Trial Session</a>
+  </div>
+</section>
+
+{% endblock %}

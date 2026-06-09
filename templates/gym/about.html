@@ -1,0 +1,185 @@
+{% extends 'gym/base.html' %}
+{% block title %}About — {{ config.gym_name }}{% endblock %}
+{% block content %}
+
+<!-- Hero -->
+<section class="about-hero">
+  <div class="container">
+    <div class="breadcrumb-apex"><a href="/">Home</a><span>/</span><span class="current">About</span></div>
+    <div class="label-apex section-label">Our Story</div>
+    <h1 class="section-title" data-aos="fade-up">THE MAKING OF<br><span class="text-orange">{{ config.gym_name }}</span></h1>
+    <div class="divider-orange mt-3"></div>
+    <p class="section-subtitle mt-3" data-aos="fade-up" data-aos-delay="100">Built from a single vision: create a space where ordinary people achieve extraordinary things.</p>
+  </div>
+</section>
+
+<!-- Story -->
+<section class="apex-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="label-apex section-label">Est. {{ config.established }}</div>
+        <h2 class="section-title">FROM DREAM<br>TO <span class="text-orange">DYNASTY</span></h2>
+        <div class="divider-orange"></div>
+        <p style="color:var(--white-70);line-height:1.8;margin-bottom:16px;">{{ config.gym_name }} was born from a single, audacious question: <em>"What if a gym could be so good, members never wanted to leave?"</em></p>
+        <p style="color:var(--white-70);line-height:1.8;margin-bottom:16px;">Founded in {{ config.established }}, we started with 3,000 sq. ft. and a relentless belief that fitness transformation was possible for everyone. Today, we operate a 12,000 sq. ft. world-class facility, home to over 8,500 members who've rewritten their stories.</p>
+        <p style="color:var(--white-70);line-height:1.8;">Every piece of equipment, every program, every coaching session — it all serves one purpose: to help you become the strongest version of yourself.</p>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="glass-card p-4 text-center">
+              <div class="stat-value text-orange mb-2">{{ config.established }}</div>
+              <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--white-40);text-transform:uppercase;letter-spacing:0.1em;">Year Founded</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="glass-card p-4 text-center">
+              <div class="stat-value text-orange mb-2">8,500+</div>
+              <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--white-40);text-transform:uppercase;letter-spacing:0.1em;">Members</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="glass-card p-4 text-center">
+              <div class="stat-value text-orange mb-2">45+</div>
+              <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--white-40);text-transform:uppercase;letter-spacing:0.1em;">Elite Trainers</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="glass-card p-4 text-center">
+              <div class="stat-value text-orange mb-2">12K</div>
+              <div style="font-family:var(--font-heading);font-size:0.8rem;color:var(--white-40);text-transform:uppercase;letter-spacing:0.1em;">Sq. Ft. Facility</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission / Vision / Values -->
+<section class="apex-section" style="background:var(--apex-charcoal);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="label-apex section-label">Our Foundation</div>
+      <h2 class="section-title">MISSION, VISION<br>& <span class="text-orange">VALUES</span></h2>
+      <div class="divider-orange mx-auto"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="value-card h-100">
+          <div class="value-icon"><i class="bi bi-bullseye"></i></div>
+          <h4 class="heading-apex mb-3" style="font-size:1.3rem;">Our Mission</h4>
+          <p style="color:var(--white-70);line-height:1.8;">To make world-class fitness accessible to everyone in {{ config.address_city }} — creating a community where ambition is nurtured, results are real, and every member feels like a champion.</p>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="value-card h-100">
+          <div class="value-icon"><i class="bi bi-eye-fill"></i></div>
+          <h4 class="heading-apex mb-3" style="font-size:1.3rem;">Our Vision</h4>
+          <p style="color:var(--white-70);line-height:1.8;">To become India's most trusted premium fitness brand — where science meets sweat, and where every transformation story begins. We envision a healthier, stronger {{ config.address_city }}.</p>
+        </div>
+      </div>
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="value-card h-100">
+          <div class="value-icon"><i class="bi bi-gem"></i></div>
+          <h4 class="heading-apex mb-3" style="font-size:1.3rem;">Trainer Philosophy</h4>
+          <p style="color:var(--white-70);line-height:1.8;">Our coaches believe in the person behind the goal. We don't sell shortcuts — we build habits, discipline, and the mental toughness that makes physical transformation possible and permanent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Core Values -->
+<section class="apex-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="label-apex section-label">What Drives Us</div>
+      <h2 class="section-title">THE <span class="text-orange">APEX</span> CODE</h2>
+      <div class="divider-orange mx-auto"></div>
+    </div>
+    <div class="row g-4">
+      {% for item in "1234"|make_list %}
+      {% if forloop.counter == 1 %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="0">
+        <div class="glass-card p-4">
+          <div style="font-family:var(--font-display);font-size:4rem;color:var(--apex-orange);opacity:0.3;line-height:1;">01</div>
+          <h5 class="heading-apex" style="font-size:1.1rem;">Excellence First</h5>
+          <p style="font-size:0.88rem;color:var(--white-40);margin:8px 0 0;line-height:1.7;">We never cut corners. Every service, every session, every interaction is held to an elite standard.</p>
+        </div>
+      </div>
+      {% elif forloop.counter == 2 %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="glass-card p-4">
+          <div style="font-family:var(--font-display);font-size:4rem;color:var(--apex-orange);opacity:0.3;line-height:1;">02</div>
+          <h5 class="heading-apex" style="font-size:1.1rem;">Science-Backed</h5>
+          <p style="font-size:0.88rem;color:var(--white-40);margin:8px 0 0;line-height:1.7;">Every program is built on evidence. No fads, no gimmicks — just proven methods that deliver results.</p>
+        </div>
+      </div>
+      {% elif forloop.counter == 3 %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="glass-card p-4">
+          <div style="font-family:var(--font-display);font-size:4rem;color:var(--apex-orange);opacity:0.3;line-height:1;">03</div>
+          <h5 class="heading-apex" style="font-size:1.1rem;">Community Power</h5>
+          <p style="font-size:0.88rem;color:var(--white-40);margin:8px 0 0;line-height:1.7;">You're never training alone at APEX. The energy of 8,500+ members fuels every rep, every mile.</p>
+        </div>
+      </div>
+      {% elif forloop.counter == 4 %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="glass-card p-4">
+          <div style="font-family:var(--font-display);font-size:4rem;color:var(--apex-orange);opacity:0.3;line-height:1;">04</div>
+          <h5 class="heading-apex" style="font-size:1.1rem;">Radical Accountability</h5>
+          <p style="font-size:0.88rem;color:var(--white-40);margin:8px 0 0;line-height:1.7;">We track everything. Progress photos, measurements, strength metrics — because what gets measured gets done.</p>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Trainers Preview -->
+{% if trainers %}
+<section class="apex-section" style="background:var(--apex-charcoal);">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-5">
+      <div>
+        <div class="label-apex section-label">The Coaches</div>
+        <h2 class="section-title">MEET THE<br><span class="text-orange">TEAM</span></h2>
+        <div class="divider-orange"></div>
+      </div>
+      <a href="{% url 'trainers' %}" class="apex-btn-outline">View All →</a>
+    </div>
+    <div class="row g-4">
+      {% for trainer in trainers|slice:":4" %}
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="trainer-card">
+          <div class="trainer-photo-wrap">
+            {% if trainer.photo %}<img src="{{ trainer.photo.url }}" alt="{{ trainer.name }}" class="trainer-photo">
+            {% else %}<div style="width:100%;height:100%;background:linear-gradient(135deg,var(--apex-dark2),var(--apex-mid));display:flex;align-items:center;justify-content:center;font-size:4rem;">👤</div>{% endif %}
+            <div class="trainer-overlay"></div>
+            <div class="trainer-exp-badge">{{ trainer.experience }}Y Exp</div>
+          </div>
+          <div class="trainer-info">
+            <div class="trainer-name">{{ trainer.name }}</div>
+            <div class="trainer-title">{{ trainer.title }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container text-center" data-aos="zoom-in">
+    <h2 class="section-title" style="color:#fff;">BECOME PART OF<br>THE APEX FAMILY</h2>
+    <p class="section-subtitle mx-auto mt-3 mb-4" style="color:rgba(255,255,255,0.8);">Our story continues with yours. Join {{ config.gym_name }} today.</p>
+    <a href="{% url 'membership' %}" class="apex-btn-primary" style="background:#fff;color:var(--apex-orange);">Explore Membership</a>
+  </div>
+</section>
+
+{% endblock %}

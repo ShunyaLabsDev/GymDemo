@@ -1,0 +1,123 @@
+{% extends 'gym/base.html' %}
+{% block title %}Gallery — {{ config.gym_name }}{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb-apex"><a href="/">Home</a><span>/</span><span class="current">Gallery</span></div>
+    <div class="label-apex section-label">Visual Tour</div>
+    <h1 class="section-title" data-aos="fade-up">THE <span class="text-orange">FACILITY</span></h1>
+    <div class="divider-orange mt-3"></div>
+    <p class="section-subtitle mt-3">12,000 sq. ft. of world-class equipment, premium amenities, and spaces built for champions.</p>
+  </div>
+</section>
+
+<section class="apex-section" style="background:var(--apex-charcoal);">
+  <div class="container">
+    <!-- Filter Tabs -->
+    <div class="filter-tabs mb-5" data-aos="fade-up">
+      <a href="{% url 'gallery' %}" class="filter-tab {% if active_category == 'all' %}active{% endif %}">All</a>
+      {% for val, label in categories %}
+      <a href="{% url 'gallery' %}?category={{ val }}" class="filter-tab {% if active_category == val %}active{% endif %}">{{ label }}</a>
+      {% endfor %}
+    </div>
+
+    {% if images %}
+    <div class="gallery-masonry" data-aos="fade-up" data-aos-delay="100">
+      {% for img in images %}
+      <div class="gallery-item" data-category="{{ img.category }}">
+        <img src="{{ img.image.url }}" alt="{{ img.caption }}" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-caption">{{ img.caption }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <!-- Placeholder grid when no images in DB -->
+    <div class="gallery-masonry" data-aos="fade-up">
+      <div class="gallery-item">
+        <div style="background:linear-gradient(135deg,#1a1a1a,#2d2d2d);aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;"><div style="font-size:3rem;">🏋️</div><div style="font-size:0.7rem;color:var(--white-40);">WEIGHT ROOM</div></div>
+      </div>
+      <div class="gallery-item">
+        <div style="background:linear-gradient(135deg,#1f1510,#2d2010);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;"><div style="font-size:3rem;">💪</div><div style="font-size:0.7rem;color:rgba(255,87,34,0.5);">CARDIO ZONE</div></div>
+      </div>
+      <div class="gallery-item">
+        <div style="background:linear-gradient(135deg,#111,#1a1a1a);aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;"><div style="font-size:3rem;">🔥</div><div style="font-size:0.7rem;color:var(--white-40);">GROUP CLASS</div></div>
+      </div>
+      <div class="gallery-item">
+        <div style="background:linear-gradient(135deg,#1a1a1a,#111);aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;"><div style="font-size:3rem;">⚡</div><div style="font-size:0.7rem;color:var(--white-40);">FUNCTIONAL AREA</div></div>
+      </div>
+      <div class="gallery-item">
+        <div style="background:linear-gradient(135deg,#1f1510,#2d1a08);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;"><div style="font-size:3rem;">🏆</div><div style="font-size:0.7rem;color:rgba(255,87,34,0.5);">LOCKER ROOM</div></div>
+      </div>
+      <div class="gallery-item">
+        <div style="background:linear-gradient(135deg,#111,#1a1a1a);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;"><div style="font-size:3rem;">🎯</div><div style="font-size:0.7rem;color:var(--white-40);">STRETCHING ZONE</div></div>
+      </div>
+      <div class="gallery-item">
+        <div style="background:linear-gradient(135deg,#1a1a1a,#2d2d2d);aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;"><div style="font-size:3rem;">🏃</div><div style="font-size:0.7rem;color:var(--white-40);">TURF AREA</div></div>
+      </div>
+      <div class="gallery-item">
+        <div style="background:linear-gradient(135deg,#1f1510,#2d2010);aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;"><div style="font-size:3rem;">🔱</div><div style="font-size:0.7rem;color:rgba(255,87,34,0.5);">BOXING RING</div></div>
+      </div>
+      <div class="gallery-item">
+        <div style="background:linear-gradient(135deg,#111,#1a1a1a);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;"><div style="font-size:3rem;">💥</div><div style="font-size:0.7rem;color:var(--white-40);">SAUNA & STEAM</div></div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <p style="color:var(--white-40);font-size:0.9rem;">Upload real gallery images via the <a href="/admin/" style="color:var(--apex-orange);">Django Admin Panel</a></p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Before / After Section -->
+<section class="apex-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="label-apex section-label">Real Proof</div>
+      <h2 class="section-title">BEFORE &<br><span class="text-orange">AFTER</span></h2>
+      <div class="divider-orange mx-auto"></div>
+      <p class="section-subtitle mx-auto mt-3">These are real APEX members who committed, showed up, and transformed.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up">
+        <div class="transform-card">
+          <div class="transform-photos">
+            <div class="transform-photo-wrap"><div style="width:100%;height:200px;background:linear-gradient(135deg,#1a1a1a,#222);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;"><div style="font-size:2.5rem;">📸</div><div style="font-size:0.7rem;color:var(--white-40);">BEFORE</div></div><span class="photo-label">Before</span></div>
+            <div class="transform-photo-wrap"><div style="width:100%;height:200px;background:linear-gradient(135deg,#2d1a0a,#3d2010);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;"><div style="font-size:2.5rem;">💪</div><div style="font-size:0.7rem;color:rgba(255,87,34,0.6);">AFTER</div></div><span class="photo-label" style="background:var(--apex-orange);">After</span></div>
+          </div>
+          <div class="transform-info"><div class="transform-meta"><span class="transform-badge">6 Months</span><span class="transform-badge">-22 kg</span></div><h6 class="heading-apex" style="font-size:1rem;">Rohit J., 32</h6><p style="font-size:0.85rem;color:var(--white-40);margin:4px 0 0;">"APEX changed my life completely. The coaches are unmatched."</p></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="transform-card">
+          <div class="transform-photos">
+            <div class="transform-photo-wrap"><div style="width:100%;height:200px;background:linear-gradient(135deg,#1a1a1a,#222);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;"><div style="font-size:2.5rem;">📸</div><div style="font-size:0.7rem;color:var(--white-40);">BEFORE</div></div><span class="photo-label">Before</span></div>
+            <div class="transform-photo-wrap"><div style="width:100%;height:200px;background:linear-gradient(135deg,#2d1a0a,#3d2010);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;"><div style="font-size:2.5rem;">💪</div><div style="font-size:0.7rem;color:rgba(255,87,34,0.6);">AFTER</div></div><span class="photo-label" style="background:var(--apex-orange);">After</span></div>
+          </div>
+          <div class="transform-info"><div class="transform-meta"><span class="transform-badge">4 Months</span><span class="transform-badge">+8 kg Muscle</span></div><h6 class="heading-apex" style="font-size:1rem;">Priya M., 26</h6><p style="font-size:0.85rem;color:var(--white-40);margin:4px 0 0;">"I gained more muscle in 4 months than 2 years elsewhere."</p></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="transform-card">
+          <div class="transform-photos">
+            <div class="transform-photo-wrap"><div style="width:100%;height:200px;background:linear-gradient(135deg,#1a1a1a,#222);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;"><div style="font-size:2.5rem;">📸</div><div style="font-size:0.7rem;color:var(--white-40);">BEFORE</div></div><span class="photo-label">Before</span></div>
+            <div class="transform-photo-wrap"><div style="width:100%;height:200px;background:linear-gradient(135deg,#2d1a0a,#3d2010);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;"><div style="font-size:2.5rem;">💪</div><div style="font-size:0.7rem;color:rgba(255,87,34,0.6);">AFTER</div></div><span class="photo-label" style="background:var(--apex-orange);">After</span></div>
+          </div>
+          <div class="transform-info"><div class="transform-meta"><span class="transform-badge">3 Months</span><span class="transform-badge">-15 kg</span></div><h6 class="heading-apex" style="font-size:1rem;">Amit S., 29</h6><p style="font-size:0.85rem;color:var(--white-40);margin:4px 0 0;">"Nutrition coaching + training gave me results I never thought possible."</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container text-center" data-aos="zoom-in">
+    <h2 class="section-title" style="color:#fff;">YOUR PHOTO<br>BELONGS HERE</h2>
+    <p class="section-subtitle mx-auto mt-3 mb-4" style="color:rgba(255,255,255,0.8);">Start your transformation today and become our next success story.</p>
+    <a href="{% url 'membership' %}" class="apex-btn-primary" style="background:#fff;color:var(--apex-orange);">Start Today</a>
+  </div>
+</section>
+
+{% endblock %}
