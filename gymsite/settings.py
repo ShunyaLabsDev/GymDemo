@@ -24,6 +24,9 @@ ALLOWED_HOSTS = os.environ.get(
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-b9d6a.up.railway.app",
 ]
+
+ALLOWED_HOSTS = ['*']
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -139,5 +142,6 @@ EMAIL_HOST_PASSWORD = site_config.EMAIL_HOST_PASSWORD
 
 # Security For Production
 SECURE_PROXY_SSL_HEADER = (
-    ('HTTP_X_FORWARDED_PROTO', 'https')
+    'HTTP_X_FORWARDED_PROTO',
+    'https'
 )
